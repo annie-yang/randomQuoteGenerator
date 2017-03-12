@@ -1,27 +1,27 @@
-// if button clicked, generate quote from API
-$(document).ready(function(){
-	$(".newQuote").on("click", function(){
-		$("#displayQuote").html(generateQuote);
-	});
-});
-
-
-// API from Forismatic
-function generateQuote() {
+// Mashape API
+function getQuote() {
 	$.ajax({
-		url: "http://api.forismatic.com/api/1.0/?",
-		dataType: "jsonp",
-		data: "method=getQuote&format=jsonp&lang=en&jsonp=?",
-		success: function(res) { // displaying quote generated from API
-			$("#displayQuote").html("<p id='quote' class='text-center'>" + res.quoteText + " &dash; " + res.quoteAuthor + "</p>");
-		}
+		url: 'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=famous',
+		type: 'POST',
+		data: {},
+		dataType:'json',
+		success: function(data) {
+			$("#displayQuote").text(data.quote + " - " + data.author);
+		},
+		error: function(err) {
+			alert(err);
+		},
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("X-Mashape-Authorization", "vc55Nypybsmsh0QpVjFDuxrYpSymp1usZU7jsnInCVV7XHLcEM");} // Key
 	});
 }
 
-$(function() {
-	generateQuote(); // call function
+$(document).ready(function(){
+	$('.newQuote').on('click', function(){ // when button clicked
+		$("#displayQuote").html(getQuote); // display quote
+	});
 });
 
-$("button").click(function(){
-	generateQuote(); // generate another new quote when button clicked
+$(function(){
+	getQuote(); // call function
 });

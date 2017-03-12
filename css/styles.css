@@ -34,7 +34,7 @@ html,body{
 	background-size: cover;
 }
 
-#quote{
+#displayQuote{
 	font-size:2em;
 	font-family: 'Roboto', sans-serif;
 }

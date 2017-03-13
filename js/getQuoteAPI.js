@@ -8,10 +8,11 @@ function getQuote() {
 		success: function(data) {
 			$("#displayQuote").text(data.quote + " - " + data.author);
 		},
-		error: function(err) {
+		error: function(err) { // error
 			alert(err);
 		},
-		beforeSend: function(xhr) {
+		beforeSend: function(xhr) { // calls function first before running send
+			// set request header so the called script knows that it's a key
 			xhr.setRequestHeader("X-Mashape-Authorization", "vc55Nypybsmsh0QpVjFDuxrYpSymp1usZU7jsnInCVV7XHLcEM");} // Key
 	});
 }
